@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Settings, 
-  AlertTriangle, 
-  Clock, 
-  Send, 
   Check, 
-  ShieldAlert, 
-  Bell, 
-  Layers 
+  AlertTriangle
 } from 'lucide-react';
 import { Workspace } from '../types';
 
@@ -17,7 +11,7 @@ interface SettingsViewProps {
 
 export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
   const [autoDetectConflicts, setAutoDetectConflicts] = useState(true);
-  const [conflictBufferMinutes, setConflictBufferMinutes] = useState('0'); // 0 = exact time slot, 30 = within 30 min
+  const [conflictBufferMinutes, setConflictBufferMinutes] = useState('0');
   const [notifyOnConflict, setNotifyOnConflict] = useState(true);
   const [preventDirectPublish, setPreventDirectPublish] = useState(false);
   const [timezone, setTimezone] = useState('Europe/Moscow (UTC+3)');
@@ -31,7 +25,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
   return (
     <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-[#161418]">
       <div className="max-w-4xl mx-auto space-y-6">
-        {/* Header */}
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">Настройки пространства</h1>
@@ -56,7 +49,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
           </div>
         </div>
 
-        {/* Section 1: Conflict Detection Rules */}
         <div className="p-6 rounded-2xl bg-[#211e25] border border-[#2f2939] space-y-5">
           <div className="flex items-center gap-3 pb-3 border-b border-[#2d2738]">
             <div className="p-2 rounded-xl bg-red-500/20 text-red-400">
@@ -73,7 +65,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
           </div>
 
           <div className="space-y-4">
-            {/* Toggle auto detect */}
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs font-medium text-white">
@@ -98,7 +89,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
               </button>
             </div>
 
-            {/* Conflict buffer time */}
             <div>
               <label className="block text-xs font-medium text-gray-300 mb-1.5">
                 Пороговое окно проверки конфликта:
@@ -115,14 +105,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
               </select>
             </div>
 
-            {/* Push notification on conflict */}
             <div className="flex items-center justify-between pt-3 border-t border-[#2d2738]">
               <div>
                 <div className="text-xs font-medium text-white">
                   Оповещение ответственного редактора
                 </div>
                 <div className="text-[11px] text-gray-400 mt-0.5">
-                  Показывать плашку-баннер вверху экрана и подсвечивать конфликтные карточки на календаре.
+                  Показывать плашку-баннер вверху экраны и подсвечивать конфликтные карточки на календаре.
                 </div>
               </div>
               <button
@@ -140,14 +129,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
               </button>
             </div>
 
-            {/* Prevent direct publishing */}
             <div className="flex items-center justify-between pt-3 border-t border-[#2d2738]">
               <div>
                 <div className="text-xs font-medium text-white">
                   Блокировка автовыхода при нерешенном конфликте
                 </div>
                 <div className="text-[11px] text-gray-400 mt-0.5">
-                  Запретить публикацию, пока редактор вручную не разведет материалы по времени.
+                  Запретить публикацию, пока редактор вручную не разведёт материалы по времени.
                 </div>
               </div>
               <button
@@ -158,7 +146,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
                 }`}
               >
                 <span
-                  className={`block w-4 h-4 rounded-full bg-white transition-transform ${
+                  className={`block w-4 h-4 rounded-full bg-white transition-colors ${
                     preventDirectPublish ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
@@ -167,7 +155,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ workspace }) => {
           </div>
         </div>
 
-        {/* Section 2: General settings */}
         <div className="p-6 rounded-2xl bg-[#211e25] border border-[#2f2939] space-y-4">
           <h3 className="text-sm font-bold text-white">Общие параметры пространства</h3>
 

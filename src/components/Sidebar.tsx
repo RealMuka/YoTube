@@ -2,13 +2,11 @@ import React from 'react';
 import { 
   Calendar as CalendarIcon, 
   FileText, 
-  Image as ImageIcon, 
   User, 
   Settings, 
   Layers, 
   Search, 
   Plus, 
-  CheckCircle2, 
   Send,
   Camera,
   Share2,
@@ -69,11 +67,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside className="w-64 bg-[#19171b] border-r border-[#2b2732] flex flex-col h-screen select-none shrink-0 text-sm">
-      {/* Brand Header */}
       <div className="p-4 border-b border-[#2b2732] flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#e5484d] to-[#ff6b6b] flex items-center justify-center shadow-md shadow-red-500/20">
-            {/* Stacked layers logo icon matching reference */}
             <div className="relative w-4 h-4 flex flex-col justify-between py-0.5">
               <span className="block h-0.5 w-full bg-white rounded-full"></span>
               <span className="block h-0.5 w-full bg-white/90 rounded-full"></span>
@@ -84,7 +80,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Quick Search */}
       <div className="px-3 pt-3">
         <button
           onClick={onOpenSearch}
@@ -100,7 +95,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </button>
       </div>
 
-      {/* Primary Navigation */}
       <div className="px-3 py-3 space-y-1">
         <button
           onClick={() => onSelectTab('calendar')}
@@ -141,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               : 'text-gray-300 hover:bg-[#231f28] hover:text-white'
           }`}
         >
-          <ImageIcon className="w-4 h-4 text-gray-400" />
+          <Camera className="w-4 h-4 text-gray-400" />
           <span>Медиа</span>
         </button>
 
@@ -160,7 +154,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <div className="h-px bg-[#26222b] mx-3 my-1"></div>
 
-      {/* Workspaces Section */}
       <div className="px-3 py-2 flex-1 overflow-y-auto">
         <div className="flex items-center justify-between px-2 mb-1.5">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
@@ -196,7 +189,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-        {/* Channels Section */}
         <div className="mt-5">
           <div className="flex items-center justify-between px-2 mb-1.5">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
@@ -237,7 +229,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Bottom Footer Section */}
       <div className="p-3 border-t border-[#27232e] bg-[#161418] space-y-2">
         <button
           onClick={() => onSelectTab('settings')}
@@ -251,18 +242,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <span>Настройки</span>
         </button>
 
-        {/* User Profile Mini Bar matching reference */}
         <div 
           onClick={() => onSelectTab('profile')}
           className="flex items-center justify-between p-2 rounded-lg bg-[#201d26] hover:bg-[#27232f] cursor-pointer transition-colors border border-[#2c2834]"
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="w-7 h-7 rounded-full bg-[#3d374a] text-purple-200 flex items-center justify-center font-medium text-xs">
-              АС
+              Ч4
             </div>
             <div className="truncate">
-              <div className="text-xs font-medium text-gray-200 truncate">Анна Смирнова</div>
-              <div className="text-[10px] text-gray-400 truncate">Администратор</div>
+              <div className="text-xs font-medium text-gray-200 truncate">Чел1234 Пупын</div>
+              <div className="text-[10px] text-gray-400 truncate">Контент-директор</div>
             </div>
           </div>
           <ChevronDown className="w-3.5 h-3.5 text-gray-400" />

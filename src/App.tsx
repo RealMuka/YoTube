@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect } from 'react';
 import { 
   Channel, 
@@ -36,7 +31,6 @@ export default function App() {
   const [channels] = useState<Channel[]>(CHANNELS);
   const [selectedChannelId, setSelectedChannelId] = useState<string | null>(null);
 
-  // Content items state (persisted locally during session)
   const [items, setItems] = useState<ContentItem[]>(() => {
     const saved = localStorage.getItem('kontentno_items');
     if (saved) {
@@ -49,12 +43,10 @@ export default function App() {
     return INITIAL_CONTENT_ITEMS;
   });
 
-  // Save changes to localStorage for persistent test experience
   useEffect(() => {
     localStorage.setItem('kontentno_items', JSON.stringify(items));
   }, [items]);
 
-  // Modals state
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
   const [activeConflictModal, setActiveConflictModal] = useState<ConflictItem | null>(null);
@@ -62,10 +54,8 @@ export default function App() {
   const [defaultDateForCreate, setDefaultDateForCreate] = useState<string | undefined>(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Dynamic automatic conflict detection
   const conflicts = detectConflicts(items, channels);
 
-  // Global Command+K shortcut
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -79,10 +69,8 @@ export default function App() {
 
   const activeWorkspace = workspaces.find((w) => w.id === activeWorkspaceId) || workspaces[0];
 
-  // Create or Update content material
   const handleSaveMaterial = (data: Partial<ContentItem>) => {
     if (data.id) {
-      // Update existing
       setItems((prev) =>
         prev.map((it) =>
           it.id === data.id
@@ -95,7 +83,6 @@ export default function App() {
         )
       );
     } else {
-      // Create new
       const newItem: ContentItem = {
         id: `cnt-${Date.now()}`,
         title: data.title || 'Новый материал',
@@ -107,9 +94,9 @@ export default function App() {
         channelId: data.channelId || channels[0]?.id || 'ch-tg',
         workspaceId: activeWorkspaceId,
         author: {
-          name: 'Анна Смирнова',
-          email: 'anna@sever.studio',
-          initials: 'АС',
+          name: 'Чел1234 Пупын',
+          email: 'chelovek1234@pochta.ru',
+          initials: 'Ч4',
           role: 'Контент-директор',
         },
         coverImage: data.coverImage,
@@ -123,13 +110,11 @@ export default function App() {
     setDefaultDateForCreate(undefined);
   };
 
-  // Delete material
   const handleDeleteMaterial = (id: string) => {
     setItems((prev) => prev.filter((it) => it.id !== id));
     setEditingItem(null);
   };
 
-  // Quick update of status / stage promotion
   const handleUpdateStatus = (itemId: string, newStatus: ContentStatus) => {
     setItems((prev) =>
       prev.map((it) =>
@@ -140,7 +125,6 @@ export default function App() {
     );
   };
 
-  // Batch resolution of conflicts (shifts time, date or channel)
   const handleResolveConflicts = (resolvedItems: ContentItem[]) => {
     setItems((prev) => {
       const map = new Map(resolvedItems.map((r) => [r.id, r]));
@@ -173,7 +157,6 @@ export default function App() {
     }
   };
 
-  // If user requested viewing the authentic Auth screens (Screenshots 1 & 2)
   if (showAuthScreens) {
     return (
       <AuthScreens
@@ -185,7 +168,6 @@ export default function App() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-[#161418] text-white">
-      {/* Sidebar for Desktop & Mobile drawer */}
       <div className={`${mobileMenuOpen ? 'block' : 'hidden'} md:block z-40 fixed md:static inset-y-0 left-0`}>
         <Sidebar
           currentTab={currentTab}
@@ -210,7 +192,6 @@ export default function App() {
         />
       </div>
 
-      {/* Backdrop for Mobile Sidebar */}
       {mobileMenuOpen && (
         <div
           onClick={() => setMobileMenuOpen(false)}
@@ -218,9 +199,7 @@ export default function App() {
         />
       )}
 
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
-        {/* Header Bar */}
         <Header
           currentTab={currentTab}
           onOpenCreateModal={() => {
@@ -236,13 +215,11 @@ export default function App() {
           workspaceName={activeWorkspace.name}
         />
 
-        {/* Global Conflict Banner at Top of View */}
         <ConflictBanner
           conflicts={conflicts}
           onOpenResolver={(conflict) => setActiveConflictModal(conflict)}
         />
 
-        {/* Section View Switcher */}
         <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
           {currentTab === 'calendar' && (
             <CalendarView
@@ -283,7 +260,6 @@ export default function App() {
         </main>
       </div>
 
-      {/* Create / Edit Material Modal */}
       <CreateEditMaterialModal
         isOpen={isCreateModalOpen}
         onClose={() => {
@@ -300,7 +276,6 @@ export default function App() {
         defaultChannelId={selectedChannelId || undefined}
       />
 
-      {/* Scheduling Conflict Resolver Modal */}
       <ConflictResolverModal
         conflict={activeConflictModal}
         channels={channels}
@@ -308,7 +283,6 @@ export default function App() {
         onResolve={handleResolveConflicts}
       />
 
-      {/* Global Command+K Search Modal */}
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}

@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  User, 
-  Mail, 
-  Phone, 
-  Briefcase, 
-  Globe, 
-  ShieldCheck, 
   Eye, 
   EyeOff, 
-  Check, 
-  Upload, 
+  Check,
   Layers,
-  Sparkles
 } from 'lucide-react';
 import { Workspace } from '../types';
 import { CURRENT_USER } from '../data/initialData';
@@ -44,7 +36,6 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
   return (
     <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-[#161418]">
       <div className="max-w-5xl mx-auto space-y-6">
-        {/* Header matching Screenshot 3 */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">Мой профиль</h1>
@@ -69,15 +60,12 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
           </div>
         </div>
 
-        {/* 2-Column Main Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column: Avatar & Workspaces */}
           <div className="space-y-6">
-            {/* User Card */}
             <div className="p-6 rounded-2xl bg-[#211e25] border border-[#2f2939] flex flex-col items-center text-center">
               <div className="relative mb-4">
                 <div className="w-24 h-24 rounded-full bg-[#dbeafe] border-4 border-[#2b2538] flex items-center justify-center text-3xl font-bold text-sky-800 shadow-inner">
-                  АС
+                  Ч4
                 </div>
               </div>
 
@@ -86,7 +74,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
 
               <div className="mt-3">
                 <span className="px-3 py-1 rounded-md text-[11px] font-medium bg-[#2e263d] text-purple-200 border border-[#48375f]">
-                  Администратор
+                  {CURRENT_USER.role}
                 </span>
               </div>
 
@@ -99,7 +87,6 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
               <span className="text-[10px] text-gray-500 mt-2">JPG или PNG · до 5 МБ</span>
             </div>
 
-            {/* Workspaces List */}
             <div className="p-5 rounded-2xl bg-[#211e25] border border-[#2f2939]">
               <h3 className="text-sm font-bold text-white mb-3">Ваши пространства</h3>
               <div className="space-y-3">
@@ -121,9 +108,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
             </div>
           </div>
 
-          {/* Right Column: Personal Data & Password */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Personal Data Form */}
             <div className="p-6 rounded-2xl bg-[#211e25] border border-[#2f2939]">
               <h3 className="text-sm font-bold text-white">Личные данные</h3>
               <p className="text-xs text-gray-400 mt-0.5 mb-5">
@@ -207,7 +192,6 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
               </form>
             </div>
 
-            {/* Security and Password */}
             <div className="p-6 rounded-2xl bg-[#211e25] border border-[#2f2939] space-y-5">
               <div>
                 <h3 className="text-sm font-bold text-white">Безопасность и пароль</h3>
@@ -283,7 +267,6 @@ export const ProfileView: React.FC<ProfileViewProps> = ({ workspaces }) => {
                 </button>
               </div>
 
-              {/* 2FA Toggle */}
               <div className="pt-4 border-t border-[#2d2738] flex items-center justify-between">
                 <div>
                   <div className="text-xs font-semibold text-white">Двухфакторная аутентификация</div>

@@ -5,11 +5,6 @@ import {
   Plus, 
   AlertTriangle, 
   Clock, 
-  Send, 
-  Filter, 
-  Layers,
-  Sparkles,
-  Info
 } from 'lucide-react';
 import { CalendarViewMode, Channel, ConflictItem, ContentCategory, ContentItem } from '../types';
 import { CATEGORIES } from '../data/initialData';
@@ -40,11 +35,8 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all');
   const [onlyConflicts, setOnlyConflicts] = useState(false);
 
-  // We anchor our week to the reference screenshot: 01.10.2026 - 07.10.2026
-  // October 2026: 01 is Thursday, 07 is Wednesday (exactly matching Screenshot 4!)
   const [currentWeekStart, setCurrentWeekStart] = useState<string>('2026-10-01');
 
-  // Compute 7 days of the week starting from currentWeekStart
   const getWeekDays = (startStr: string) => {
     const days = [];
     const baseDate = new Date(startStr + 'T00:00:00');
@@ -62,7 +54,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
       days.push({
         dateStr,
         dayLabel: `${dayOfWeek}, ${dateNum}.${month}`,
-        isToday: dateStr === '2026-10-05', // Contextual date
+        isToday: dateStr === '2026-10-05',
         dayNumber: dateNum,
       });
     }
@@ -87,7 +79,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
     setCurrentWeekStart('2026-10-01');
   };
 
-  // Filter items
   const filteredItems = items.filter((item) => {
     if (selectedChannelId && item.channelId !== selectedChannelId) return false;
     if (selectedCategory !== 'all' && item.category !== selectedCategory) return false;
@@ -99,9 +90,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
     return CATEGORIES.find((c) => c.id === catId)?.label || catId;
   };
 
-  // Color scheme based on category/type matching Screenshot 4:
-  // Red/coral cards for ad, blog, email, pr, video, podcast
-  // Purple/lavender cards for social, analytics
   const getCardStyle = (item: ContentItem) => {
     const inConflict = isItemInConflict(item.id, conflicts);
     if (inConflict) {
@@ -124,7 +112,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
       };
     }
 
-    // Coral / red cards (as in Screenshot 4)
     return {
       bg: 'bg-[#eb4b5b]/90 hover:bg-[#f25a69]',
       border: 'border-[#ff6675]/60',
@@ -136,9 +123,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#161418]">
-      {/* Top Toolbar matching Screenshot 4 */}
       <div className="p-4 sm:p-5 border-b border-[#292431] flex flex-wrap items-center justify-between gap-4 bg-[#1a171d]">
-        {/* Left: View Mode Toggles */}
         <div className="flex items-center gap-1.5 p-1 bg-[#231f28] rounded-xl border border-[#342e3d]">
           <button
             onClick={() => setViewMode('month')}
@@ -168,7 +153,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           </button>
         </div>
 
-        {/* Center: Date Range Navigator matching Screenshot 4: "← 01.10 - 07.10 2026 →" */}
         <div className="flex items-center gap-3">
           <button
             onClick={handlePrevWeek}
@@ -194,9 +178,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           </button>
         </div>
 
-        {/* Right: Filters */}
         <div className="flex items-center gap-2.5">
-          {/* Category Filter */}
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value as ContentCategory | 'all')}
@@ -210,7 +192,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
             ))}
           </select>
 
-          {/* Toggle only conflicts */}
           <button
             onClick={() => setOnlyConflicts(!onlyConflicts)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
@@ -228,7 +209,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
         </div>
       </div>
 
-      {/* Week Grid Body matching Screenshot 4 */}
       {viewMode === 'week' ? (
         <div className="flex-1 overflow-x-auto overflow-y-auto p-4 sm:p-6">
           <div className="min-w-[960px] grid grid-cols-7 gap-3 h-full">
@@ -245,7 +225,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                       : 'border-[#2c2736]'
                   }`}
                 >
-                  {/* Column Header */}
                   <div className="p-3 border-b border-[#282332] flex items-center justify-between">
                     <div>
                       <div className="text-xs font-bold text-gray-200 uppercase tracking-wider">
@@ -268,7 +247,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                     </button>
                   </div>
 
-                  {/* Column Cards Container */}
                   <div className="p-2 space-y-2.5 flex-1 overflow-y-auto">
                     {dayItems.length === 0 ? (
                       <div className="h-24 flex items-center justify-center text-[11px] text-gray-400 italic">
@@ -290,7 +268,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                               inConflict ? 'conflict-card-glow ring-2 ring-red-500' : 'shadow-sm'
                             }`}
                           >
-                            {/* If item has a cover photo (like "Осень — время новых идей" from Screenshot 1 & 2) */}
                             {item.coverImage && (
                               <div className="mb-2 rounded-lg overflow-hidden h-20 w-full relative">
                                 <img
@@ -304,7 +281,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                               </div>
                             )}
 
-                            {/* Conflict Warning Ribbon */}
                             {inConflict && (
                               <div 
                                 onClick={(e) => {
@@ -321,17 +297,14 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                               </div>
                             )}
 
-                            {/* Card Title */}
                             <h4 className={`text-xs font-bold leading-snug line-clamp-2 ${style.title}`}>
                               {item.title}
                             </h4>
 
-                            {/* Category & Time Unboxed Metadata */}
                             <div className={`mt-1.5 text-[10px] font-medium flex items-center gap-1.5 ${style.meta}`}>
                               <span>Категория: {getCategoryLabel(item.category)}</span>
                             </div>
 
-                            {/* Channel & Status Details */}
                             <div className="mt-2 pt-1.5 border-t border-white/10 flex items-center justify-between text-[10px] text-white/80">
                               <span className="flex items-center gap-1">
                                 <Clock className="w-3 h-3 opacity-80" />
@@ -347,7 +320,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                     )}
                   </div>
 
-                  {/* Quick Add at bottom */}
                   <div className="p-2 pt-0">
                     <button
                       onClick={() => onCreateAtDate(day.dateStr)}
@@ -363,7 +335,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           </div>
         </div>
       ) : (
-        /* Month Grid View */
         <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-7 gap-2 mb-2 text-center text-xs font-semibold text-gray-400">

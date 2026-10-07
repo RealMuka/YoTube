@@ -2,18 +2,11 @@ import React, { useState } from 'react';
 import { 
   Plus, 
   Search, 
-  Filter, 
   LayoutGrid, 
   List as ListIcon, 
   AlertTriangle, 
   Clock, 
   ArrowRight, 
-  CheckCircle2, 
-  RotateCcw, 
-  Send, 
-  MoreHorizontal,
-  ChevronRight,
-  ExternalLink,
   SlidersHorizontal,
   Calendar as CalendarIcon
 } from 'lucide-react';
@@ -50,7 +43,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<ContentCategory | 'all'>('all');
   const [onlyConflicts, setOnlyConflicts] = useState(false);
 
-  // Filter items
   const filteredItems = items.filter((item) => {
     if (selectedChannelId && item.channelId !== selectedChannelId) return false;
     if (selectedCategory !== 'all' && item.category !== selectedCategory) return false;
@@ -74,9 +66,7 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#161418]">
-      {/* Top Controls Toolbar */}
       <div className="p-4 sm:p-5 border-b border-[#292431] bg-[#1a171d] flex flex-wrap items-center justify-between gap-4">
-        {/* Left: Search and Views */}
         <div className="flex items-center gap-3 flex-1 min-w-[280px]">
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -115,9 +105,7 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
           </div>
         </div>
 
-        {/* Right: Filters & Action */}
         <div className="flex items-center gap-2.5 flex-wrap">
-          {/* Stage filter */}
           <select
             value={selectedStage}
             onChange={(e) => setSelectedStage(e.target.value as ContentStage | 'all')}
@@ -129,7 +117,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
             <option value="published">Этап 3: Опубликовано</option>
           </select>
 
-          {/* Category filter */}
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value as ContentCategory | 'all')}
@@ -143,7 +130,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
             ))}
           </select>
 
-          {/* Conflict filter button */}
           <button
             onClick={() => setOnlyConflicts(!onlyConflicts)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
@@ -159,7 +145,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
             )}
           </button>
 
-          {/* Create Button */}
           <button
             onClick={onOpenCreateModal}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#f25a5a] hover:bg-[#ff6969] text-white text-xs font-semibold shadow-md shadow-red-500/20 transition-colors cursor-pointer"
@@ -170,9 +155,7 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
         </div>
       </div>
 
-      {/* Content View Area */}
       {viewMode === 'kanban' ? (
-        /* KANBAN PIPELINE VIEW (STAGES OF LIFECYCLE) */
         <div className="flex-1 overflow-x-auto overflow-y-auto p-4 sm:p-6">
           <div className="min-w-[900px] grid grid-cols-3 gap-5 h-full">
             {stagesList.map((stageKey) => {
@@ -189,7 +172,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                   key={stageKey}
                   className="flex flex-col rounded-2xl bg-[#1c1921] border border-[#2d2738] overflow-hidden"
                 >
-                  {/* Stage Column Header */}
                   <div className="p-4 border-b border-[#292433] bg-[#1f1b25] flex items-center justify-between">
                     <div>
                       <div className="flex items-center gap-2">
@@ -209,7 +191,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                     )}
                   </div>
 
-                  {/* Stage Items List */}
                   <div className="p-3 space-y-3 flex-1 overflow-y-auto">
                     {stageItems.length === 0 ? (
                       <div className="h-32 flex flex-col items-center justify-center text-xs text-gray-500 italic border border-dashed border-[#2d2836] rounded-xl p-4">
@@ -238,13 +219,11 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                                 : 'border-[#332c3e] hover:border-[#4d425c]'
                             }`}
                           >
-                            {/* Top info: Category & Status */}
                             <div className="flex items-center justify-between gap-2 mb-2">
                               <span className="text-[10px] font-semibold uppercase tracking-wider text-rose-400">
                                 {getCategoryName(item.category)}
                               </span>
 
-                              {/* Status indicator */}
                               <span 
                                 className="text-[10px] font-medium px-2 py-0.5 rounded"
                                 style={{ backgroundColor: statusMeta.bg, color: statusMeta.color }}
@@ -253,7 +232,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                               </span>
                             </div>
 
-                            {/* Conflict Alert in Card */}
                             {inConflict && (
                               <div
                                 onClick={(e) => {
@@ -270,7 +248,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                               </div>
                             )}
 
-                            {/* Title */}
                             <h4 className="font-semibold text-xs sm:text-sm text-white line-clamp-2 mb-1.5 leading-snug">
                               {item.title}
                             </h4>
@@ -281,7 +258,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                               </p>
                             )}
 
-                            {/* Metadata footer */}
                             <div className="flex items-center justify-between pt-2 border-t border-[#2e2838] text-[10px] text-gray-400">
                               <div className="flex items-center gap-1.5 truncate">
                                 <Clock className="w-3 h-3 text-gray-400" />
@@ -295,7 +271,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                               </span>
                             </div>
 
-                            {/* Stage Transition Quick Actions */}
                             <div 
                               className="mt-3 pt-2 border-t border-[#2c2637] flex items-center justify-between gap-2"
                               onClick={(e) => e.stopPropagation()}
@@ -316,7 +291,7 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                                     <button
                                       onClick={() => onUpdateStatus(item.id, 'draft')}
                                       className="px-2 py-1 rounded bg-[#282330] hover:bg-[#322c3d] text-[10px] text-gray-300 transition-colors"
-                                      title="Вернуть в черновик"
+                                      title="Вернуть в черновник"
                                     >
                                       ↩ Черновик
                                     </button>
@@ -350,7 +325,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
           </div>
         </div>
       ) : (
-        /* TABLE / LIST VIEW */
         <div className="flex-1 overflow-y-auto p-4 sm:p-6">
           <div className="rounded-2xl bg-[#1c1921] border border-[#2d2738] overflow-hidden">
             <table className="w-full text-left text-xs text-gray-300">
@@ -380,7 +354,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                         inConflict ? 'bg-red-950/20' : ''
                       }`}
                     >
-                      {/* Title & conflict flag */}
                       <td className="py-3 px-4 max-w-xs">
                         <div className="font-semibold text-white truncate">{item.title}</div>
                         {inConflict && (
@@ -391,12 +364,10 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                         )}
                       </td>
 
-                      {/* Category */}
                       <td className="py-3 px-4 text-gray-300">
                         {getCategoryName(item.category)}
                       </td>
 
-                      {/* Status Dropdown */}
                       <td className="py-3 px-4" onClick={(e) => e.stopPropagation()}>
                         <select
                           value={item.status}
@@ -423,7 +394,6 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                         </select>
                       </td>
 
-                      {/* Date & Time */}
                       <td className="py-3 px-4 whitespace-nowrap">
                         <div className="flex items-center gap-1.5">
                           <CalendarIcon className="w-3.5 h-3.5 text-gray-400" />
@@ -432,17 +402,14 @@ export const MaterialsView: React.FC<MaterialsViewProps> = ({
                         </div>
                       </td>
 
-                      {/* Channel */}
                       <td className="py-3 px-4 text-gray-300 truncate max-w-[120px]">
                         {channelObj?.name || 'Канал'}
                       </td>
 
-                      {/* Author */}
                       <td className="py-3 px-4 text-gray-400">
                         {item.author.name}
                       </td>
 
-                      {/* Actions */}
                       <td className="py-3 px-4 text-right" onClick={(e) => e.stopPropagation()}>
                         {inConflict && conflict ? (
                           <button

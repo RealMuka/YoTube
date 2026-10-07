@@ -3,10 +3,7 @@ import {
   Eye, 
   EyeOff, 
   Mail, 
-  ArrowRight, 
-  Check, 
-  ShieldCheck, 
-  Sparkles,
+  ArrowRight,
   ArrowLeft
 } from 'lucide-react';
 import { SAMPLE_COVER_IMAGE } from '../data/initialData';
@@ -21,9 +18,9 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
   onBackToApp,
 }) => {
   const [mode, setMode] = useState<'login' | 'register'>('login');
-  const [email, setEmail] = useState('anna@sever.studio');
+  const [email, setEmail] = useState('chelovek1234@pochta.ru');
   const [password, setPassword] = useState('••••••••••••');
-  const [name, setName] = useState('Анна Смирнова');
+  const [name, setName] = useState('Чел1234 Пупын');
   const [rememberMe, setRememberMe] = useState(true);
   const [agreeTerms, setAgreeTerms] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -35,9 +32,7 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
 
   return (
     <div className="min-h-screen w-full bg-[#181619] text-white flex flex-col lg:flex-row select-none">
-      {/* Left Promo Brand Column (Matching Screenshot 1 & 2) */}
       <div className="lg:w-1/2 p-8 lg:p-14 flex flex-col justify-between bg-[#1e1b1f] border-b lg:border-b-0 lg:border-r border-[#2c2732] relative overflow-hidden">
-        {/* Top Brand Logo */}
         <div>
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#e5484d] to-[#ff6b6b] flex items-center justify-center shadow-lg shadow-red-500/20">
@@ -50,12 +45,10 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
             <span className="font-bold text-xl tracking-tight text-white">Контентно</span>
           </div>
 
-          {/* Slogan Pill */}
           <div className="mt-12 inline-block px-3.5 py-1 rounded-full text-xs font-medium bg-[#2b253b] text-[#9d93d8] border border-[#3f3557]">
             Меньше хаоса. Больше контента.
           </div>
 
-          {/* Heading and Subtitle */}
           <h1 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
             От идеи до публикации <br />— вместе.
           </h1>
@@ -63,31 +56,26 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
             Планируйте материалы, обсуждайте идеи и управляйте всеми каналами в одном пространстве.
           </p>
 
-          {/* Feature Showcase Card matching Screenshot 1 & 2 */}
           <div className="mt-8 max-w-md rounded-2xl bg-[#26222b] border border-[#383142] p-4 sm:p-5 shadow-2xl">
-            {/* Card Header */}
             <div className="flex items-center justify-between mb-3 text-xs">
-              <span className="font-semibold text-gray-200">Студия Север</span>
+              <span className="font-semibold text-gray-200">Контент-бардак</span>
               <span className="px-2 py-0.5 rounded text-[10px] bg-[#342e42] text-purple-200 font-medium">
                 Октябрь 2026
               </span>
             </div>
 
-            {/* Autumn Coffee & Notebook Photo */}
             <div className="rounded-xl overflow-hidden h-36 w-full relative mb-4">
               <img
                 src={SAMPLE_COVER_IMAGE}
-                alt="Осень"
+                alt="Обложка"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Card Content Title */}
             <h3 className="font-bold text-base text-white">
-              Осень — время новых идей
+              Чайник планирует мир захватить
             </h3>
 
-            {/* Badges */}
             <div className="mt-2 flex items-center gap-2 text-xs">
               <span className="px-2.5 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/40 font-medium text-[11px]">
                 Готово к публикации
@@ -95,33 +83,29 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
               <span className="text-gray-400 text-[11px]">Пн, 5 окт · 10:00</span>
             </div>
 
-            {/* Author avatars & team note */}
             <div className="mt-4 pt-3 border-t border-[#362f40] flex items-center justify-between text-xs text-gray-400">
               <div className="flex items-center -space-x-1.5">
                 <span className="w-6 h-6 rounded-full bg-[#413952] text-purple-200 flex items-center justify-center text-[9px] font-bold ring-2 ring-[#26222b]">
-                  АС
+                  Ч4
                 </span>
                 <span className="w-6 h-6 rounded-full bg-[#334657] text-blue-200 flex items-center justify-center text-[9px] font-bold ring-2 ring-[#26222b]">
-                  МК
+                  ГФ
                 </span>
                 <span className="w-6 h-6 rounded-full bg-[#523947] text-pink-200 flex items-center justify-center text-[9px] font-bold ring-2 ring-[#26222b]">
-                  ЕВ
+                  ТБ
                 </span>
               </div>
-              <span className="text-[11px] text-gray-400">Одна команда. Один контент-план.</span>
+              <span className="text-[11px] text-gray-400">Одна команда. Один план.</span>
             </div>
           </div>
         </div>
 
-        {/* Bottom promo text */}
         <div className="mt-8 text-xs text-gray-400">
           Ваш контент в порядке — от первого черновика до последнего согласования.
         </div>
       </div>
 
-      {/* Right Form Column */}
       <div className="lg:w-1/2 p-8 lg:p-16 flex flex-col justify-between">
-        {/* Top Switcher */}
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={onBackToApp}
@@ -156,10 +140,8 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
           </div>
         </div>
 
-        {/* Form Container */}
         <div className="max-w-md w-full mx-auto my-auto py-8">
           {mode === 'login' ? (
-            /* LOGIN SCREEN (Screenshot 1) */
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 С возвращением!
@@ -179,7 +161,7 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="anna@sever.studio"
+                      placeholder="chelovek1234@pochta.ru"
                       className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#f25a5a] pr-10"
                     />
                     <Mail className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
@@ -241,7 +223,6 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
               </form>
             </div>
           ) : (
-            /* REGISTER SCREEN (Screenshot 2) */
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                 Начните с одной идеи
@@ -260,7 +241,7 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Анна Смирнова"
+                    placeholder="Чел1234 Пупын"
                     className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white focus:outline-none focus:border-[#f25a5a]"
                   />
                 </div>
@@ -275,7 +256,7 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="anna@sever.studio"
+                      placeholder="chelovek1234@pochta.ru"
                       className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white focus:outline-none focus:border-[#f25a5a] pr-10"
                     />
                     <Mail className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
@@ -338,7 +319,6 @@ export const AuthScreens: React.FC<AuthScreensProps> = ({
           )}
         </div>
 
-        {/* Bottom Footer */}
         <div className="flex items-center justify-between text-xs text-gray-500 pt-6 border-t border-[#26222c]">
           <span>© 2026 Контентно</span>
           <span>Нужна помощь?</span>

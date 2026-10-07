@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   X, 
-  Calendar as CalendarIcon, 
-  Clock, 
   AlertTriangle, 
-  Trash2, 
-  Check, 
-  Tag, 
-  Layers, 
-  FileText,
-  Send
+  Trash2,
 } from 'lucide-react';
 import { Channel, ContentCategory, ContentItem, ContentStatus } from '../types';
 import { CATEGORIES } from '../data/initialData';
@@ -56,7 +49,6 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
   const [tagsInput, setTagsInput] = useState(initialItem?.tags?.join(', ') || '');
   const [coverImage, setCoverImage] = useState(initialItem?.coverImage || '');
 
-  // Live Conflict Detection check
   const potentialConflict = checkPotentialConflict(
     {
       channelId,
@@ -100,7 +92,6 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
           boxShadow: '0 0 35px rgba(242, 90, 90, 0.15)',
         }}
       >
-        {/* Header matching Screenshot 5 */}
         <div className="p-6 pb-4 flex items-center justify-between">
           <h2 className="text-xl font-bold text-white tracking-tight">
             {isEditing ? 'Редактировать материал' : 'Создать материал'}
@@ -114,9 +105,7 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
           </button>
         </div>
 
-        {/* Form Body */}
         <form onSubmit={handleSubmit} className="px-6 pb-6 overflow-y-auto space-y-4">
-          {/* Title */}
           <div>
             <label className="block text-xs font-medium text-gray-300 mb-1.5">
               Название материала <span className="text-red-400">*</span>
@@ -131,7 +120,6 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
             />
           </div>
 
-          {/* Category Dropdown */}
           <div>
             <label className="block text-xs font-medium text-gray-300 mb-1.5">
               Категория
@@ -149,7 +137,6 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
             </select>
           </div>
 
-          {/* Status Dropdown (Stages) */}
           <div>
             <label className="block text-xs font-medium text-gray-300 mb-1.5">
               Статус и этап жизненного цикла
@@ -175,7 +162,6 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
             </select>
           </div>
 
-          {/* Channel Dropdown */}
           <div>
             <label className="block text-xs font-medium text-gray-300 mb-1.5">
               Канал публикации
@@ -193,7 +179,6 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
             </select>
           </div>
 
-          {/* Date & Time Grid */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-gray-300 mb-1.5">
@@ -224,14 +209,13 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
             </div>
           </div>
 
-          {/* LIVE CONFLICT NOTIFICATION */}
           {potentialConflict.hasConflict && (
             <div className="p-3.5 rounded-xl bg-red-950/60 border border-red-500/50 text-xs text-red-200 animate-in fade-in">
               <div className="flex items-start gap-2.5">
                 <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5 animate-pulse" />
                 <div>
                   <div className="font-semibold text-red-300">
-                    ⚠️ Внимание: Конфликт времени публикации!
+                    Внимание: Конфликт времени публикации!
                   </div>
                   <p className="mt-1 text-gray-300 text-[11px] leading-relaxed">
                     В канале <strong className="text-white">{channels.find(c => c.id === channelId)?.name}</strong> на{' '}
@@ -243,14 +227,13 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
                     )}
                   </p>
                   <p className="mt-1 text-[10px] text-red-400">
-                    Рекомендуется изменить время на 30–60 минут или выбрать другой канал перед публикацией.
+                    Лучше сменить время на 30–60 минут или выбрать другой канал.
                   </p>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Description */}
           <div>
             <label className="block text-xs font-medium text-gray-300 mb-1.5">
               Краткое описание / Тезисы
@@ -259,12 +242,11 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Основная мысль или ссылка на ТЗ..."
+              placeholder="Основная мысль..."
               className="w-full px-3.5 py-2 rounded-xl bg-[#1d1a21] border border-[#3e3848] text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#f25a5a] transition-colors"
             />
           </div>
 
-          {/* Tags */}
           <div>
             <label className="block text-xs font-medium text-gray-300 mb-1.5">
               Теги (через запятую)
@@ -273,12 +255,11 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
               type="text"
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              placeholder="анонс, продукт, акция..."
+              placeholder="тег1, тег2..."
               className="w-full px-3 py-2 rounded-xl bg-[#1d1a21] border border-[#3e3848] text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#f25a5a] transition-colors"
             />
           </div>
 
-          {/* Actions matching Screenshot 5 */}
           <div className="pt-3 flex items-center justify-between gap-3 border-t border-[#312c3b]">
             {isEditing && onDelete ? (
               <button
@@ -300,7 +281,7 @@ export const CreateEditMaterialModal: React.FC<CreateEditMaterialModalProps> = (
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2.5 rounded-xl bg-[#2a2533] hover:bg-[#342f3f] text-gray-200 text-sm font-medium border border-[#40394e] transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-[#2a2533] hover:bg-[#342f3f] text-gray-200 text-sm font-medium border border-[#40394e] transition-colors"
               >
                 Отмена
               </button>

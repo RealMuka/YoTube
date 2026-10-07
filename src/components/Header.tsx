@@ -5,10 +5,7 @@ import {
   AlertTriangle, 
   Menu, 
   ExternalLink, 
-  Check, 
-  Sparkles,
-  LogOut,
-  ChevronRight
+  Check
 } from 'lucide-react';
 import { ConflictItem, ViewTab } from '../types';
 
@@ -54,7 +51,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="h-16 border-b border-[#2a2632] bg-[#161418] px-6 flex items-center justify-between shrink-0">
-      {/* Left breadcrumb info */}
       <div className="flex items-center gap-3">
         {onToggleMobileMenu && (
           <button
@@ -69,15 +65,12 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Right actions */}
       <div className="flex items-center gap-3">
-        {/* Workspace plan badge */}
         <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-[#2b2536] text-purple-200 border border-[#40354f]">
           <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
           <span>Командный план</span>
         </div>
 
-        {/* Conflict Notifications Bell */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -92,7 +85,6 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </button>
 
-          {/* Notifications Dropdown */}
           {showNotifications && (
             <div className="absolute right-0 mt-2 w-80 bg-[#211e26] border border-[#373142] rounded-xl shadow-2xl z-50 p-3 animate-in fade-in zoom-in-95">
               <div className="flex items-center justify-between pb-2 border-b border-[#2f2a38] mb-2">
@@ -149,17 +141,15 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {/* Demo: Switch to Login / Register page from Screenshots 1 & 2 */}
         <button
           onClick={onToggleAuthView}
           className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs text-gray-300 hover:text-white bg-[#221f29] hover:bg-[#2b2634] border border-[#342f3d] transition-colors"
-          title="Просмотреть экраны авторизации и регистрации из референсов"
+          title="Просмотреть экраны авторизации и регистрации"
         >
           <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
-          <span>Экран входа</span>
+          <span>Выйти</span>
         </button>
 
-        {/* Create Material Button (Coral Red) */}
         <button
           onClick={onOpenCreateModal}
           className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#f25a5a] hover:bg-[#ff6969] active:bg-[#e04a4a] text-white text-xs font-semibold shadow-md shadow-red-500/20 transition-colors cursor-pointer"
@@ -168,13 +158,12 @@ export const Header: React.FC<HeaderProps> = ({
           <span>Создать материал</span>
         </button>
 
-        {/* User Avatar Circle */}
         <button
           onClick={() => onSelectTab('profile')}
           className="w-8 h-8 rounded-full bg-[#3c344a] text-purple-200 flex items-center justify-center font-medium text-xs hover:ring-2 hover:ring-purple-400/50 transition-all ml-1 cursor-pointer"
           title="Открыть профиль"
         >
-          АС
+          Ч4
         </button>
       </div>
     </header>

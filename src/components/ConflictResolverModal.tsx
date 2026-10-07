@@ -4,11 +4,8 @@ import {
   AlertTriangle, 
   Clock, 
   Calendar as CalendarIcon, 
-  ArrowRight, 
-  Check, 
   Shuffle, 
   Send, 
-  Edit3
 } from 'lucide-react';
 import { Channel, ConflictItem, ContentItem } from '../types';
 import { formatDateRu } from '../utils/conflicts';
@@ -35,7 +32,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
 
   const targetItem = items.find((it) => it.id === selectedItemId) || items[0];
 
-  // Helper to shift time
   const handleShiftTime = (minutesToAdd: number) => {
     const [h, m] = targetItem.publishTime.split(':').map(Number);
     const totalMinutes = h * 60 + m + minutesToAdd;
@@ -52,7 +48,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
     onClose();
   };
 
-  // Helper to shift day
   const handleShiftDay = (daysToAdd: number) => {
     const d = new Date(targetItem.publishDate + 'T00:00:00');
     d.setDate(d.getDate() + daysToAdd);
@@ -67,7 +62,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
     onClose();
   };
 
-  // Helper to switch channel
   const handleChangeChannel = (channelId: string) => {
     const updated = items.map((it) =>
       it.id === targetItem.id
@@ -78,7 +72,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
     onClose();
   };
 
-  // Helper to convert to draft
   const handleMoveToDraft = () => {
     const updated: ContentItem[] = items.map((it) =>
       it.id === targetItem.id
@@ -94,7 +87,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in">
       <div className="bg-[#211e26] border border-[#3b3546] rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-        {/* Modal Header */}
         <div className="p-5 border-b border-[#302a3a] flex items-center justify-between bg-[#1b1820]">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-xl bg-red-500/20 text-red-400">
@@ -103,7 +95,7 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
             <div>
               <h3 className="text-base font-semibold text-white">Разрешение конфликта расписания</h3>
               <p className="text-xs text-gray-400 mt-0.5">
-                Автоматически обнаружено совпадение времени в одном канале
+                Совпадение времени в одном канале
               </p>
             </div>
           </div>
@@ -115,9 +107,7 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
           </button>
         </div>
 
-        {/* Modal Body */}
         <div className="p-6 overflow-y-auto space-y-6">
-          {/* Conflict Summary Badge */}
           <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-300 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-red-400" />
@@ -131,10 +121,9 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
             </div>
           </div>
 
-          {/* Colliding Materials Comparison */}
           <div>
             <label className="text-xs font-medium text-gray-400 block mb-2">
-              Конфликтующие материалы (выберите, какой из них хотите перенести):
+              Конфликтующие материалы (выберите, какой перенести):
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {items.map((item, index) => {
@@ -176,13 +165,11 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
             </div>
           </div>
 
-          {/* Quick Resolution Actions */}
           <div className="space-y-3 pt-2">
             <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider">
               Быстрые варианты устранения коллизии:
             </h4>
 
-            {/* Option 1: Shift Time */}
             <div className="p-3 rounded-xl bg-[#1b1820] border border-[#312a3d] space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-medium text-gray-200 flex items-center gap-1.5">
@@ -212,7 +199,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
               </div>
             </div>
 
-            {/* Option 2: Shift Date */}
             <div className="p-3 rounded-xl bg-[#1b1820] border border-[#312a3d] space-y-2">
               <span className="text-xs font-medium text-gray-200 flex items-center gap-1.5">
                 <CalendarIcon className="w-4 h-4 text-purple-400" />
@@ -234,7 +220,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
               </div>
             </div>
 
-            {/* Option 3: Change Channel */}
             <div className="p-3 rounded-xl bg-[#1b1820] border border-[#312a3d] space-y-2">
               <span className="text-xs font-medium text-gray-200 flex items-center gap-1.5">
                 <Shuffle className="w-4 h-4 text-blue-400" />
@@ -253,7 +238,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
               </div>
             </div>
 
-            {/* Option 4: Return to draft */}
             <div className="pt-1 flex items-center justify-between text-xs">
               <button
                 onClick={handleMoveToDraft}
@@ -265,7 +249,6 @@ export const ConflictResolverModal: React.FC<ConflictResolverModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Footer */}
         <div className="p-4 border-t border-[#302a3a] bg-[#1a1720] flex items-center justify-end gap-3">
           <button
             onClick={onClose}

@@ -32,17 +32,11 @@ export function getStageForStatus(status: ContentStatus): ContentStage {
   return STATUS_MAP[status]?.stage || 'preparation';
 }
 
-/**
- * Detects time conflicts when two or more scheduled/ready materials
- * are assigned to the exact same channel and identical time slot.
- */
 export function detectConflicts(items: ContentItem[], channels: Channel[]): ConflictItem[] {
-  // Only check items that are scheduled/ready or active (exclude archived or pure drafts without channel)
   const activeItems = items.filter(
     (item) => item.status === 'scheduled' || item.status === 'ready'
   );
 
-  // Group by channelId + publishDate + publishTime
   const map = new Map<string, ContentItem[]>();
 
   for (const item of activeItems) {
@@ -81,9 +75,6 @@ export function getConflictForItem(itemId: string, conflicts: ConflictItem[]): C
   return conflicts.find((c) => c.items.some((it) => it.id === itemId));
 }
 
-/**
- * Checks in real time whether a material being created or updated will conflict
- */
 export function checkPotentialConflict(
   data: {
     channelId: string;

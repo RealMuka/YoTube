@@ -1,23 +1,23 @@
 export type ContentStatus = 
-  | 'draft'        // Черновик (Подготовка)
-  | 'in_review'    // На согласовании (Подготовка)
-  | 'approved'     // Утвержден (Подготовка)
-  | 'scheduled'    // Запланировано (Планирование)
-  | 'ready'        // Готово к публикации (Планирование)
-  | 'published'    // Опубликовано (Опубликованный контент)
-  | 'archived';    // В архиве (Опубликованный контент)
+  | 'draft'
+  | 'in_review'
+  | 'approved'
+  | 'scheduled'
+  | 'ready'
+  | 'published'
+  | 'archived';
 
 export type ContentStage = 'preparation' | 'scheduling' | 'published';
 
 export type ContentCategory = 
-  | 'social'       // Социальные сети
-  | 'blog'         // Блог
-  | 'email'        // Email-рассылка
-  | 'ad'           // Реклама
-  | 'video'        // Видео
-  | 'podcast'      // Подкаст
-  | 'analytics'    // Аналитика
-  | 'pr';          // PR-релиз
+  | 'social'
+  | 'blog'
+  | 'email'
+  | 'ad'
+  | 'video'
+  | 'podcast'
+  | 'analytics'
+  | 'pr';
 
 export interface Channel {
   id: string;
@@ -48,8 +48,8 @@ export interface ContentItem {
   description?: string;
   category: ContentCategory;
   status: ContentStatus;
-  publishDate: string; // YYYY-MM-DD e.g. "2026-10-05"
-  publishTime: string; // HH:mm e.g. "10:00"
+  publishDate: string;
+  publishTime: string;
   channelId: string;
   workspaceId: string;
   author: Author;
@@ -60,7 +60,7 @@ export interface ContentItem {
 }
 
 export interface ConflictItem {
-  conflictKey: string; // channelId + publishDate + publishTime
+  conflictKey: string;
   date: string;
   time: string;
   channelId: string;

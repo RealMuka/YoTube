@@ -12,39 +12,38 @@ export const CATEGORIES: { id: ContentCategory; label: string; color: string }[]
 ];
 
 export const WORKSPACES: Workspace[] = [
-  { id: 'ws-1', name: 'Студия Север', role: 'Администратор', membersCount: 6 },
-  { id: 'ws-2', name: 'Бренд-медиа', role: 'Редактор', membersCount: 4 },
-  { id: 'ws-3', name: 'Личные проекты', role: 'Владелец', membersCount: 1 },
+  { id: 'ws-1', name: 'Контент-бардак', role: 'Администратор', membersCount: 6 },
+  { id: 'ws-2', name: 'Рекламный паблик', role: 'Редактор', membersCount: 4 },
+  { id: 'ws-3', name: 'Сырые идеи', role: 'Владелец', membersCount: 1 },
 ];
 
 export const CHANNELS: Channel[] = [
-  { id: 'ch-tg', name: 'Север / Telegram', handle: '@sever_studio', platform: 'telegram', workspaceId: 'ws-1' },
-  { id: 'ch-vk', name: 'Север / VK', handle: 'vk.com/sever.studio', platform: 'vk', workspaceId: 'ws-1' },
-  { id: 'ch-ig', name: 'Север / Instagram', handle: '@sever.creativestudio', platform: 'instagram', workspaceId: 'ws-1' },
-  { id: 'ch-yt', name: 'Север / YouTube', handle: '@sever_video', platform: 'youtube', workspaceId: 'ws-1' },
-  { id: 'ch-web', name: 'Блог на сайте', handle: 'sever.studio/blog', platform: 'website', workspaceId: 'ws-1' },
+  { id: 'ch-tg', name: 'Бардак / Telegram', handle: '@bardak_off', platform: 'telegram', workspaceId: 'ws-1' },
+  { id: 'ch-vk', name: 'Бардак / VK', handle: 'vk.com/bardak_off', platform: 'vk', workspaceId: 'ws-1' },
+  { id: 'ch-ig', name: 'Бардак / Instagram', handle: '@bardak_off', platform: 'instagram', workspaceId: 'ws-1' },
+  { id: 'ch-yt', name: 'Бардак / YouTube', handle: '@BardakOffline', platform: 'youtube', workspaceId: 'ws-1' },
+  { id: 'ch-web', name: 'Блог на сайте', handle: 'bardakoff/blog', platform: 'website', workspaceId: 'ws-1' },
 ];
 
 export const CURRENT_USER = {
-  firstName: 'Анна',
-  lastName: 'Смирнова',
-  email: 'anna@sever.studio',
-  phone: '+7 (999) 123-45-67',
+  firstName: 'Чел1234',
+  lastName: 'Пупын',
+  email: 'chelovek1234@pochta.ru',
+  phone: '+7 (999) 666-66-66',
   role: 'Администратор',
   position: 'Контент-директор',
   language: 'Русский',
-  initials: 'АС',
+  initials: 'Ч4',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80',
 };
 
-// Cover photo matching the notebook and coffee on wooden desk from reference screenshots 1 & 2
 export const SAMPLE_COVER_IMAGE = 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=900&auto=format&fit=crop&q=80';
 
 export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   {
     id: 'cnt-1',
-    title: 'Осень — время новых идей',
-    description: 'Сезонный обзор ключевых креативных тенденций и планов студии на IV квартал. Вдохновляющий манифест.',
+    title: 'Чайник планирует мир захватить',
+    description: 'Сезонный манифест креативных идей от главного теоретика на IV квартал. Собирательно вдохновляющий.',
     category: 'social',
     status: 'ready',
     publishDate: '2026-10-05',
@@ -52,9 +51,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Анна Смирнова',
-      email: 'anna@sever.studio',
-      initials: 'АС',
+      name: 'Чел1234 Пупын',
+      email: 'chelovek1234@pochta.ru',
+      initials: 'Ч4',
       role: 'Контент-директор',
     },
     coverImage: SAMPLE_COVER_IMAGE,
@@ -64,18 +63,18 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-2',
-    title: 'Пост в Telegram (конфликт расписания)',
-    description: 'Срочный анонс спецпредложения для партнеров агентства.',
+    title: 'Пост в Телеграм (да, опять конфликт)',
+    description: 'Срочный анонс спецпредложения для партнеров агентства. Должен был выйти раньше.',
     category: 'social',
     status: 'scheduled',
     publishDate: '2026-10-05',
-    publishTime: '10:00', // CONFLICT with cnt-1 on same channel ch-tg!
+    publishTime: '10:00',
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Михаил Ковалев',
-      email: 'mikhail@sever.studio',
-      initials: 'МК',
+      name: 'Глеб Флопов',
+      email: 'gleb@flop.pro',
+      initials: 'ГФ',
       role: 'Копирайтер',
     },
     tags: ['анонс', 'партнеры'],
@@ -84,7 +83,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-3',
-    title: 'Запуск кампании Q4',
+    title: 'Запуск кампании Q4: спасите пожар',
     description: 'Масштабный запуск рекламной кампании для флагманского продукта на всех ключевых площадках.',
     category: 'ad',
     status: 'scheduled',
@@ -93,9 +92,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Елена Васильева',
-      email: 'elena@sever.studio',
-      initials: 'ЕВ',
+      name: 'Таня Булька',
+      email: 'tanya@bulka.beer',
+      initials: 'ТБ',
       role: 'Таргетолог',
     },
     tags: ['кампания', 'Q4', 'performance'],
@@ -104,7 +103,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-4',
-    title: 'Подготовка контента для соцсетей',
+    title: 'Контент для соцсетей: срочно',
     description: 'Сбор материалов, фотосессия команды и согласование драфтов с креативным директором.',
     category: 'social',
     status: 'draft',
@@ -113,9 +112,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-vk',
     workspaceId: 'ws-1',
     author: {
-      name: 'Анна Смирнова',
-      email: 'anna@sever.studio',
-      initials: 'АС',
+      name: 'Чел1234 Пупын',
+      email: 'chelovek1234@pochta.ru',
+      initials: 'Ч4',
       role: 'Контент-директор',
     },
     tags: ['бэкстейдж', 'команда'],
@@ -124,7 +123,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-5',
-    title: 'Новости компании: итоги квартала',
+    title: 'Новости: мы выжили третий квартал',
     description: 'Подробный лонгрид в корпоративный блог о достижениях, ключевых метриках и новых клиентах.',
     category: 'blog',
     status: 'scheduled',
@@ -133,9 +132,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-web',
     workspaceId: 'ws-1',
     author: {
-      name: 'Михаил Ковалев',
-      email: 'mikhail@sever.studio',
-      initials: 'МК',
+      name: 'Глеб Флопов',
+      email: 'gleb@flop.pro',
+      initials: 'ГФ',
       role: 'Копирайтер',
     },
     tags: ['блог', 'итоги', 'рост'],
@@ -144,7 +143,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-6',
-    title: 'Пост в Instagram: визуальная эстетика',
+    title: 'Красивинка для инсты',
     description: 'Карусель с графическими приемами и типографикой нового сезона.',
     category: 'social',
     status: 'ready',
@@ -153,9 +152,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-ig',
     workspaceId: 'ws-1',
     author: {
-      name: 'Елена Васильева',
-      email: 'elena@sever.studio',
-      initials: 'ЕВ',
+      name: 'Таня Булька',
+      email: 'tanya@bulka.beer',
+      initials: 'ТБ',
       role: 'Дизайнер',
     },
     tags: ['визуал', 'дизайн', 'типографика'],
@@ -164,7 +163,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-7',
-    title: 'Email-рассылка: дайджест октября',
+    title: 'Рассылка: вчера не выспался',
     description: 'Письмо подписчикам с подборкой лучших кейсов и полезных шаблонов для маркетологов.',
     category: 'email',
     status: 'scheduled',
@@ -173,9 +172,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Анна Смирнова',
-      email: 'anna@sever.studio',
-      initials: 'АС',
+      name: 'Чел1234 Пупын',
+      email: 'chelovek1234@pochta.ru',
+      initials: 'Ч4',
       role: 'Контент-директор',
     },
     tags: ['email', 'дайджест'],
@@ -184,7 +183,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-8',
-    title: 'Видео-обзор нового инструмента',
+    title: 'Ролик про штуку которой нет в наличии',
     description: '10-минутный разбор функций сервиса аналитики с практическими примерами использования.',
     category: 'video',
     status: 'scheduled',
@@ -193,9 +192,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-yt',
     workspaceId: 'ws-1',
     author: {
-      name: 'Михаил Ковалев',
-      email: 'mikhail@sever.studio',
-      initials: 'МК',
+      name: 'Глеб Флопов',
+      email: 'gleb@flop.pro',
+      initials: 'ГФ',
       role: 'Видеограф',
     },
     tags: ['youtube', 'видео', 'туториал'],
@@ -204,7 +203,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-9',
-    title: 'PR-релиз для отраслевых СМИ',
+    title: 'Пресс-релиз: мы лучше всех',
     description: 'Пресс-релиз об открытии нового направления digital-стратегии и исследования рынка.',
     category: 'pr',
     status: 'in_review',
@@ -213,9 +212,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Елена Васильева',
-      email: 'elena@sever.studio',
-      initials: 'ЕВ',
+      name: 'Таня Булька',
+      email: 'tanya@bulka.beer',
+      initials: 'ТБ',
       role: 'PR-менеджер',
     },
     tags: ['pr', 'сми', 'релиз'],
@@ -224,8 +223,8 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-10',
-    title: 'Специальный выпуск подкаста #42',
-    description: 'Беседа с лидером продуктовой команды о будущем AI в создании контента.',
+    title: 'Подкаст #42: интервью с холодильником',
+    description: 'Беседа с холодильником о будущем AI в создании контента. Да, вы все правильно слышите.',
     category: 'podcast',
     status: 'scheduled',
     publishDate: '2026-10-06',
@@ -233,9 +232,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Михаил Ковалев',
-      email: 'mikhail@sever.studio',
-      initials: 'МК',
+      name: 'Глеб Флопов',
+      email: 'gleb@flop.pro',
+      initials: 'ГФ',
       role: 'Ведущий',
     },
     tags: ['подкаст', 'аудио', 'интервью'],
@@ -244,7 +243,7 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
   },
   {
     id: 'cnt-11',
-    title: 'Отчет за неделю: охваты и вовлеченность',
+    title: 'Отчет: никто не читает',
     description: 'Сводный аналитический отчет с графиками конверсий и рекомендациями по оптимизации.',
     category: 'analytics',
     status: 'published',
@@ -253,9 +252,9 @@ export const INITIAL_CONTENT_ITEMS: ContentItem[] = [
     channelId: 'ch-tg',
     workspaceId: 'ws-1',
     author: {
-      name: 'Анна Смирнова',
-      email: 'anna@sever.studio',
-      initials: 'АС',
+      name: 'Чел1234 Пупын',
+      email: 'chelovek1234@pochta.ru',
+      initials: 'Ч4',
       role: 'Контент-директор',
     },
     tags: ['аналитика', 'метрики', 'отчет'],

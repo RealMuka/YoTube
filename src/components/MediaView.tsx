@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Upload, 
-  Image as ImageIcon, 
   Search, 
-  Tag, 
-  ExternalLink, 
-  Sparkles, 
-  Check, 
-  Plus, 
-  FileText 
 } from 'lucide-react';
 import { SAMPLE_COVER_IMAGE } from '../data/initialData';
 
@@ -19,57 +12,57 @@ export const MediaView: React.FC = () => {
   const mediaList = [
     {
       id: 'med-1',
-      title: 'Осень — блокнот, кофе и эскизы',
+      title: 'Чайник, блокнот и паника',
       url: SAMPLE_COVER_IMAGE,
       type: 'image/jpeg',
       dimensions: '1920 × 1080',
       size: '2.4 МБ',
-      usedIn: '«Осень — время новых идей»',
-      tags: ['осень', 'обложка', 'кофе', 'стол'],
+      usedIn: '«Чайник планирует мир захватить»',
+      tags: ['осень', 'паника', 'кофе', 'стол'],
       uploadedAt: '01.10.2026',
     },
     {
       id: 'med-2',
-      title: 'Рекламный вижуал кампании Q4',
+      title: 'Рекламный вижуал Q4: спасите пожар',
       url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80',
       type: 'image/jpeg',
       dimensions: '1200 × 628',
       size: '1.8 МБ',
-      usedIn: '«Запуск кампании Q4»',
-      tags: ['реклама', 'Q4', 'дизайн'],
+      usedIn: '«Запуск кампании Q4: спасите пожар»',
+      tags: ['реклама', 'Q4', 'паника'],
       uploadedAt: '30.09.2026',
     },
     {
       id: 'med-3',
-      title: 'Студийный микрофон (Подкаст #42)',
+      title: 'Микрофон для подкаста с холодильником',
       url: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&auto=format&fit=crop&q=80',
       type: 'image/jpeg',
       dimensions: '1080 × 1080',
       size: '3.1 МБ',
-      usedIn: '«Специальный выпуск подкаста #42»',
-      tags: ['подкаст', 'аудио', 'студия'],
+      usedIn: '«Подкаст #42: интервью с холодильником»',
+      tags: ['подкаст', 'аудио', 'страх'],
       uploadedAt: '02.10.2026',
     },
     {
       id: 'med-4',
-      title: 'Дашборд аналитики и метрики',
+      title: 'Дашборд паники и метрик',
       url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
       type: 'image/jpeg',
       dimensions: '1600 × 900',
       size: '1.2 МБ',
-      usedIn: '«Отчет за неделю: охваты»',
-      tags: ['аналитика', 'графики', 'отчет'],
+      usedIn: '«Отчет: никто не читает»',
+      tags: ['аналитика', 'графики', 'боль'],
       uploadedAt: '03.10.2026',
     },
     {
       id: 'med-5',
-      title: 'Рабочее пространство команды Север',
+      title: 'Бардак команды Бардак',
       url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80',
       type: 'image/jpeg',
       dimensions: '1920 × 1280',
       size: '2.9 МБ',
-      usedIn: '«Новости компании: итоги»',
-      tags: ['команда', 'офис', 'север'],
+      usedIn: '«Новости: мы выжили Q3»',
+      tags: ['команда', 'офис', 'бардак'],
       uploadedAt: '02.10.2026',
     },
   ];
@@ -86,12 +79,11 @@ export const MediaView: React.FC = () => {
   return (
     <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-[#161418]">
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">Медиатека</h1>
             <p className="text-xs text-gray-400 mt-1">
-              Хранилище графических материалов, фото и ассетов для публикации в каналах.
+              Графические материалы, фото и ассеты для публикаций в каналах.
             </p>
           </div>
 
@@ -104,7 +96,6 @@ export const MediaView: React.FC = () => {
           </button>
         </div>
 
-        {/* Toolbar */}
         <div className="flex items-center gap-3">
           <div className="relative flex-1 max-w-sm">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -134,7 +125,6 @@ export const MediaView: React.FC = () => {
           </div>
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {filteredMedia.map((m) => (
             <div

@@ -23,7 +23,6 @@
   }
 }
 
-/* Custom sleek scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -42,7 +41,6 @@
   background: #524a5d;
 }
 
-/* Conflict pulse animation */
 @keyframes conflictPulse {
   0%, 100% {
     box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.4), 0 0 12px rgba(239, 68, 68, 0.25);

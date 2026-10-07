@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Контентно
 
-# Run and deploy your AI Studio app
+Сервис управления цифровым контентом и планирования публикаций с календарем и автоопределением конфликтов.
 
-This contains everything you need to run your app locally.
+## Как запустить
 
-View your app in AI Studio: https://ai.studio/apps/0a4e2106-2ec1-4cce-94dd-2aa623c475ac
+1. Установить зависимости:
+   ```
+   npm install
+   ```
+2. Создать `.env.local` из `.env.example` и заполнить переменные окружения.
+3. Запустить dev-сервер:
+   ```
+   npm run dev
+   ```
 
-## Run Locally
+Приложение откроется по адресу http://localhost:3000.
 
-**Prerequisites:**  Node.js
+## Скрипты
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- `npm run dev` — dev-сервер с HMR
+- `npm run build` — production сборка в `dist/`
+- `npm run preview` — локальный просмотр production-сборки
+- `npm run lint` — проверка типизации

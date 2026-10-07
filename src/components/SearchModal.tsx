@@ -24,7 +24,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        // handled in parent
       }
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -51,7 +50,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-black/75 backdrop-blur-sm animate-in fade-in">
       <div className="bg-[#211e26] border border-[#393245] rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[75vh]">
-        {/* Search Input Bar */}
         <div className="p-4 border-b border-[#2e2838] flex items-center gap-3 bg-[#1c1922]">
           <Search className="w-5 h-5 text-gray-400 shrink-0" />
           <input
@@ -70,7 +68,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           </button>
         </div>
 
-        {/* Results List */}
         <div className="p-3 overflow-y-auto space-y-2 flex-1">
           {results.length === 0 ? (
             <div className="py-10 text-center text-xs text-gray-400">
