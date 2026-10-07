@@ -1,0 +1,6 @@
+{
+  "name": "Контентно",
+  "description": "Сервис управления цифровым контентом и планирования публикаций с календарем и автоопределением конфликтов",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

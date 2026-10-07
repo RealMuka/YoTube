@@ -1,0 +1,349 @@
+import React, { useState } from 'react';
+import { 
+  Eye, 
+  EyeOff, 
+  Mail, 
+  ArrowRight, 
+  Check, 
+  ShieldCheck, 
+  Sparkles,
+  ArrowLeft
+} from 'lucide-react';
+import { SAMPLE_COVER_IMAGE } from '../data/initialData';
+
+interface AuthScreensProps {
+  onLoginSuccess: () => void;
+  onBackToApp: () => void;
+}
+
+export const AuthScreens: React.FC<AuthScreensProps> = ({
+  onLoginSuccess,
+  onBackToApp,
+}) => {
+  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [email, setEmail] = useState('anna@sever.studio');
+  const [password, setPassword] = useState('••••••••••••');
+  const [name, setName] = useState('Анна Смирнова');
+  const [rememberMe, setRememberMe] = useState(true);
+  const [agreeTerms, setAgreeTerms] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onLoginSuccess();
+  };
+
+  return (
+    <div className="min-h-screen w-full bg-[#181619] text-white flex flex-col lg:flex-row select-none">
+      {/* Left Promo Brand Column (Matching Screenshot 1 & 2) */}
+      <div className="lg:w-1/2 p-8 lg:p-14 flex flex-col justify-between bg-[#1e1b1f] border-b lg:border-b-0 lg:border-r border-[#2c2732] relative overflow-hidden">
+        {/* Top Brand Logo */}
+        <div>
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#e5484d] to-[#ff6b6b] flex items-center justify-center shadow-lg shadow-red-500/20">
+              <div className="relative w-5 h-5 flex flex-col justify-between py-0.5">
+                <span className="block h-0.5 w-full bg-white rounded-full"></span>
+                <span className="block h-0.5 w-full bg-white/90 rounded-full"></span>
+                <span className="block h-0.5 w-full bg-white/80 rounded-full"></span>
+              </div>
+            </div>
+            <span className="font-bold text-xl tracking-tight text-white">Контентно</span>
+          </div>
+
+          {/* Slogan Pill */}
+          <div className="mt-12 inline-block px-3.5 py-1 rounded-full text-xs font-medium bg-[#2b253b] text-[#9d93d8] border border-[#3f3557]">
+            Меньше хаоса. Больше контента.
+          </div>
+
+          {/* Heading and Subtitle */}
+          <h1 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            От идеи до публикации <br />— вместе.
+          </h1>
+          <p className="mt-4 text-sm sm:text-base text-gray-400 max-w-lg leading-relaxed">
+            Планируйте материалы, обсуждайте идеи и управляйте всеми каналами в одном пространстве.
+          </p>
+
+          {/* Feature Showcase Card matching Screenshot 1 & 2 */}
+          <div className="mt-8 max-w-md rounded-2xl bg-[#26222b] border border-[#383142] p-4 sm:p-5 shadow-2xl">
+            {/* Card Header */}
+            <div className="flex items-center justify-between mb-3 text-xs">
+              <span className="font-semibold text-gray-200">Студия Север</span>
+              <span className="px-2 py-0.5 rounded text-[10px] bg-[#342e42] text-purple-200 font-medium">
+                Октябрь 2026
+              </span>
+            </div>
+
+            {/* Autumn Coffee & Notebook Photo */}
+            <div className="rounded-xl overflow-hidden h-36 w-full relative mb-4">
+              <img
+                src={SAMPLE_COVER_IMAGE}
+                alt="Осень"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Card Content Title */}
+            <h3 className="font-bold text-base text-white">
+              Осень — время новых идей
+            </h3>
+
+            {/* Badges */}
+            <div className="mt-2 flex items-center gap-2 text-xs">
+              <span className="px-2.5 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/40 font-medium text-[11px]">
+                Готово к публикации
+              </span>
+              <span className="text-gray-400 text-[11px]">Пн, 5 окт · 10:00</span>
+            </div>
+
+            {/* Author avatars & team note */}
+            <div className="mt-4 pt-3 border-t border-[#362f40] flex items-center justify-between text-xs text-gray-400">
+              <div className="flex items-center -space-x-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#413952] text-purple-200 flex items-center justify-center text-[9px] font-bold ring-2 ring-[#26222b]">
+                  АС
+                </span>
+                <span className="w-6 h-6 rounded-full bg-[#334657] text-blue-200 flex items-center justify-center text-[9px] font-bold ring-2 ring-[#26222b]">
+                  МК
+                </span>
+                <span className="w-6 h-6 rounded-full bg-[#523947] text-pink-200 flex items-center justify-center text-[9px] font-bold ring-2 ring-[#26222b]">
+                  ЕВ
+                </span>
+              </div>
+              <span className="text-[11px] text-gray-400">Одна команда. Один контент-план.</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom promo text */}
+        <div className="mt-8 text-xs text-gray-400">
+          Ваш контент в порядке — от первого черновика до последнего согласования.
+        </div>
+      </div>
+
+      {/* Right Form Column */}
+      <div className="lg:w-1/2 p-8 lg:p-16 flex flex-col justify-between">
+        {/* Top Switcher */}
+        <div className="flex items-center justify-between mb-8">
+          <button
+            onClick={onBackToApp}
+            className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Вернуться в приложение</span>
+          </button>
+
+          <div className="text-xs text-gray-400">
+            {mode === 'login' ? (
+              <>
+                Нет аккаунта?{' '}
+                <button
+                  onClick={() => setMode('register')}
+                  className="text-purple-300 hover:text-white font-medium ml-1 cursor-pointer"
+                >
+                  Зарегистрироваться →
+                </button>
+              </>
+            ) : (
+              <>
+                Уже с нами?{' '}
+                <button
+                  onClick={() => setMode('login')}
+                  className="text-purple-300 hover:text-white font-medium ml-1 cursor-pointer"
+                >
+                  Войти →
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Form Container */}
+        <div className="max-w-md w-full mx-auto my-auto py-8">
+          {mode === 'login' ? (
+            /* LOGIN SCREEN (Screenshot 1) */
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                С возвращением!
+              </h2>
+              <p className="text-xs text-gray-400 mt-2">
+                Войдите, чтобы продолжить работу над контентом вашей команды.
+              </p>
+
+              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Email
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="anna@sever.studio"
+                      className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#f25a5a] pr-10"
+                    />
+                    <Mail className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Пароль
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#f25a5a] pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                  <div className="text-[11px] text-gray-500 mt-1 cursor-pointer hover:text-gray-400" onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs pt-1">
+                  <label className="flex items-center gap-2 cursor-pointer text-gray-300">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className="rounded border-[#383142] text-[#f25a5a] focus:ring-0"
+                    />
+                    <span>Запомнить меня</span>
+                  </label>
+
+                  <a href="#" onClick={(e) => e.preventDefault()} className="text-purple-300 hover:underline">
+                    Забыли пароль?
+                  </a>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full mt-4 py-3 rounded-xl bg-[#f25a5a] hover:bg-[#ff6969] text-white font-semibold text-sm shadow-lg shadow-red-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Войти</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <div className="text-center text-[11px] text-gray-400 pt-3">
+                  Защищённый вход · ваши данные только у вас
+                </div>
+              </form>
+            </div>
+          ) : (
+            /* REGISTER SCREEN (Screenshot 2) */
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                Начните с одной идеи
+              </h2>
+              <p className="text-xs text-gray-400 mt-2">
+                Создайте аккаунт и соберите команду в своём рабочем пространстве.
+              </p>
+
+              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Ваше имя
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Анна Смирнова"
+                    className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white focus:outline-none focus:border-[#f25a5a]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Рабочий email
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="anna@sever.studio"
+                      className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white focus:outline-none focus:border-[#f25a5a] pr-10"
+                    />
+                    <Mail className="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Пароль
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-3.5 py-3 rounded-xl bg-[#242028] border border-[#383142] text-xs sm:text-sm text-white focus:outline-none focus:border-[#f25a5a] pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                  <div className="text-[11px] text-gray-500 mt-1">
+                    Надёжный пароль · не менее 8 символов
+                  </div>
+                </div>
+
+                <div className="text-xs pt-1">
+                  <label className="flex items-start gap-2 cursor-pointer text-gray-300">
+                    <input
+                      type="checkbox"
+                      checked={agreeTerms}
+                      onChange={(e) => setAgreeTerms(e.target.checked)}
+                      className="mt-0.5 rounded border-[#383142] text-[#f25a5a] focus:ring-0"
+                    />
+                    <span>Я принимаю условия использования и политику конфиденциальности</span>
+                  </label>
+                  <div className="mt-1 text-[11px] text-purple-300 pl-5">
+                    Условия использования · Политика конфиденциальности
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full mt-4 py-3 rounded-xl bg-[#f25a5a] hover:bg-[#ff6969] text-white font-semibold text-sm shadow-lg shadow-red-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                  <span>Создать аккаунт</span>
+                </button>
+
+                <div className="text-center text-[11px] text-gray-400 pt-3">
+                  После регистрации вы сможете создать пространство или принять приглашение команды.
+                </div>
+              </form>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Footer */}
+        <div className="flex items-center justify-between text-xs text-gray-500 pt-6 border-t border-[#26222c]">
+          <span>© 2026 Контентно</span>
+          <span>Нужна помощь?</span>
+        </div>
+      </div>
+    </div>
+  );
+};

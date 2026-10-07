@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-dark: #151317;
+    --sidebar-dark: #19171b;
+    --card-dark: #211e24;
+    --card-hover: #29252e;
+    --input-dark: #27232b;
+    --border-dark: #35303c;
+    --accent-coral: #f25a5a;
+    --accent-coral-hover: #f77070;
+    --accent-purple: #9d93d8;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #f3f4f6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3c3644;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #524a5d;
+}
+
+/* Conflict pulse animation */
+@keyframes conflictPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.4), 0 0 12px rgba(239, 68, 68, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.8), 0 0 20px rgba(239, 68, 68, 0.45);
+  }
+}
+
+.conflict-card-glow {
+  animation: conflictPulse 2s infinite ease-in-out;
+}
