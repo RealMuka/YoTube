@@ -1,8 +1,13 @@
 node_modules/
-build/
-dist/
+**/node_modules/
+client/dist/
+server/dist/
+server/uploads/*
+!server/uploads/.gitkeep
+*.tsbuildinfo
 coverage/
 .DS_Store
 *.log
-.env*
+.env
+.env.*
 !.env.example

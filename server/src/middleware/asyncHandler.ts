@@ -1,0 +1,6 @@
+import type { Request, Response, NextFunction, RequestHandler } from 'express';
+
+type AsyncRoute = (req: Request, res: Response, next: NextFunction) => Promise<unknown>;
+export const asyncHandler = (handler: AsyncRoute): RequestHandler => (req, res, next) => {
+  void Promise.resolve(handler(req, res, next)).catch(next);
+};
