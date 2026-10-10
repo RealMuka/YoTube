@@ -1,0 +1,385 @@
+{
+  "info": {
+    "name": "YoTube API",
+    "description": "Основные запросы для проверки авторизации, пространств, материалов, медиа и конфликтов расписания.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "name",
+      "value": "Алексей Иванов"
+    },
+    {
+      "key": "email",
+      "value": "alex@example.com"
+    },
+    {
+      "key": "password",
+      "value": "ChangeThisPassword123!"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "workspaceId",
+      "value": ""
+    },
+    {
+      "key": "materialId",
+      "value": ""
+    },
+    {
+      "key": "conflictId",
+      "value": ""
+    },
+    {
+      "key": "mediaId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('API is healthy', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{name}}\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Account created', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "if (body.token) pm.collectionVariables.set('token', body.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Login successful', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "if (body.token) pm.collectionVariables.set('token', body.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Current user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workspaces",
+      "item": [
+        {
+          "name": "List / initialize workspaces",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/workspaces"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Workspaces loaded', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "if (body.items?.[0]?.id) pm.collectionVariables.set('workspaceId', body.items[0].id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create workspace",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Рабочее пространство\"\n}"
+            },
+            "url": "{{baseUrl}}/workspaces"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Workspace created', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "if (body.item?.id) pm.collectionVariables.set('workspaceId', body.item.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete workspace (only after creating another)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/workspaces/{{workspaceId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Materials",
+      "item": [
+        {
+          "name": "List materials in a workspace",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/materials?workspaceId={{workspaceId}}"
+          }
+        },
+        {
+          "name": "Create draft material",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Пример публикации для теста\",\n  \"description\": \"Тестовый материал, созданный из Postman\",\n  \"platform\": \"telegram\",\n  \"status\": \"draft\",\n  \"uiStatus\": \"draft\",\n  \"scheduledAt\": \"2026-10-15T10:00:00.000Z\",\n  \"channelId\": \"ch-tg\",\n  \"workspaceId\": \"{{workspaceId}}\",\n  \"category\": \"social\",\n  \"tags\": [\"postman\", \"пример\"]\n}"
+            },
+            "url": "{{baseUrl}}/materials"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Material created', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "const item = body.item || body;",
+                  "if (item._id || item.id) pm.collectionVariables.set('materialId', item._id || item.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update material (change date)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Пример публикации для теста — обновлено\",\n  \"description\": \"Дата обновлена через Postman\",\n  \"platform\": \"telegram\",\n  \"status\": \"draft\",\n  \"uiStatus\": \"draft\",\n  \"scheduledAt\": \"2026-10-16T11:30:00.000Z\",\n  \"channelId\": \"ch-tg\",\n  \"workspaceId\": \"{{workspaceId}}\",\n  \"category\": \"social\",\n  \"tags\": [\"postman\", \"обновлено\"]\n}"
+            },
+            "url": "{{baseUrl}}/materials/{{materialId}}"
+          }
+        },
+        {
+          "name": "Delete material",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/materials/{{materialId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Conflicts",
+      "item": [
+        {
+          "name": "List pending conflicts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/conflicts?status=pending&workspaceId={{workspaceId}}"
+          }
+        },
+        {
+          "name": "Resolve conflict",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/conflicts/{{conflictId}}/resolve"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "item": [
+        {
+          "name": "List media",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/media"
+          }
+        },
+        {
+          "name": "Upload media (select a file in Postman)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/media"
+          }
+        }
+      ]
+    }
+  ]
+}
